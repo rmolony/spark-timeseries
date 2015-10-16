@@ -17,7 +17,7 @@ package com.cloudera.sparkts
 
 import com.github.nscala_time.time.Imports._
 
-import org.joda.time.{Days, Hours}
+import org.joda.time.{Days, Hours, Minutes}
 
 class BusinessDayRichInt(n: Int) {
   def businessDays: BusinessDayFrequency = new BusinessDayFrequency(n)
@@ -62,6 +62,13 @@ class HourFrequency(val hours: Int) extends PeriodFrequency(hours.hours) {
   def difference(dt1: DateTime, dt2: DateTime): Int = Hours.hoursBetween(dt1, dt2).getHours / hours
 
   override def toString: String = s"hours $hours"
+}
+
+class MinuteFrequency(val minutes: Int) extends PeriodFrequency(minutes.minutes) {
+
+  def difference(dt1: DateTime, dt2: DateTime): Int = Minutes.minutesBetween(dt1, dt2).getMinutes / minutes
+
+  override def toString: String = s"minutes $minutes"
 }
 
 class BusinessDayFrequency(val days: Int) extends Frequency {
